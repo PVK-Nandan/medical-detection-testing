@@ -237,7 +237,7 @@ medical-detection-testing/
 4. ⏳ Test trained RetinaNet model later
 5. ⏳ Upload results to `results/retinanet/`
 
-### For Abhay (MedGamma):
+### For Anubhav (MedGamma):
 1. Open Colab notebook (click badge)
 2. Save copy to Drive
 3. Modify for MedGamma
@@ -247,10 +247,10 @@ medical-detection-testing/
 7. Upload to `results/medgamma/` in GitHub
 
 ### For Nidhi (ViT):
-1. Same as Abhay, but for ViT
+1. Same as Anubhav, but for ViT
 2. Upload to `results/vit/`
 
-### For Anubhav (Other Model):
+### For others (Other Model):
 1. Same process
 2. Upload to `results/other_model/`
 
@@ -368,7 +368,7 @@ The pipeline is **ready to use** for:
 - ✅ Creating publication-ready visualizations
 - ✅ Comparing team results fairly
 
-**Questions?** Check the demo notebook or ask in team chat!
+**Questions?** Check the demo notebook or let's discuss!
 
 ---
 
