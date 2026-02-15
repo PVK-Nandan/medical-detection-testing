@@ -159,7 +159,7 @@ metrics_calc.plot_confusion_matrix(save_path='results/confusion_matrix.png')
 1. **Copy the Colab notebook** to your Google Drive
 2. **Change ONLY the model loading part:**
 
-#### For Abhay (MedGamma):
+#### For Suppose Anubhav (MedGamma):
 ```python
 # Cell: Load Model
 from medgamma import MedGamma  # Your model library
@@ -174,7 +174,7 @@ output = model(image)
 prob = output.item()  # Your model's output format
 ```
 
-#### For Nidhi (ViT):
+#### For Suppose Nidhi (ViT):
 ```python
 # Cell: Load Model
 from vit import VisionTransformer  # Your model library
@@ -237,14 +237,14 @@ medical-detection-testing/
 
 ## 🔄 Workflow for Team
 
-### For Nandan (You - First Time):
+### For Nandan (Me - First Time):
 1. ✅ **Done!** Demo works
 2. ✅ Upload this repository to GitHub
-3. ✅ Share link with team
-4. Later: Test with your trained RetinaNet model
+3. ✅ Shared link with team
+4. Later: Test I will test my trained RetinaNet model
 5. Upload results to `results/retinanet/`
 
-### For Abhay (MedGamma):
+### For Anubhav (MedGamma):
 1. Open the Colab notebook (from GitHub link)
 2. Copy to your Google Drive
 3. Modify model loading for MedGamma
@@ -254,10 +254,10 @@ medical-detection-testing/
 7. Upload to `results/medgamma/` folder in GitHub
 
 ### For Nidhi (ViT):
-1. Same as Abhay, but for ViT model
+1. Same as Anubhav, but for ViT model
 2. Upload to `results/vit/`
 
-### For Anubhav (Other Model):
+### For Others (Other Model):
 1. Same process
 2. Upload to `results/other_model/`
 
@@ -376,10 +376,7 @@ The pipeline is **ready to use** for:
 - ✅ Comparing team results
 - ✅ Creating publication-ready results
 
-**Questions?** Check the demo notebook or ask your team!
+**Questions?** Check the demo notebook
 
 ---
 
-**Made with ❤️ by Team: Nandan, Abhay, Nidhi, Anubhav**
-
-**Stanford MURA & FracAtlas Methodology**
