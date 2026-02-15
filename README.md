@@ -1,6 +1,6 @@
 # 🏥 Medical Detection Testing Framework
 
-## Team: Nandan, Abhay, Nidhi, Anubhav
+## Team AI:  Abhay, Nidhi, Anubhav, Nandan
 
 A complete testing pipeline for medical image abnormality detection models, implementing metrics from **MURA** and **FracAtlas** papers.
 
