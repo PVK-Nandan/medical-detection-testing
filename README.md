@@ -146,7 +146,7 @@ metrics_calc.plot_confusion_matrix(save_path='results/confusion_matrix.png')
 2. **File** → **Save a copy in Drive**
 3. **Change ONLY the model loading:**
 
-#### For Abhay (MedGamma):
+#### For Suppose Anubhav (MedGamma):
 ```python
 # Cell: Load Model
 from medgamma import MedGamma
@@ -160,7 +160,7 @@ output = model(image)
 prob = output.item()  # Adjust based on your model
 ```
 
-#### For Nidhi (ViT):
+#### For suppose Nidhi (ViT):
 ```python
 # Cell: Load Model
 from vit import VisionTransformer
@@ -174,7 +174,7 @@ output = model(image)
 prob = torch.softmax(output, dim=1)[0][1].item()
 ```
 
-#### For Anubhav (Other Model):
+#### For others (Other Model):
 ```python
 # Cell: Load Model
 from your_library import YourModel
@@ -263,9 +263,9 @@ After everyone tests, we'll have:
 | Model | Sensitivity | Specificity | Kappa | AUROC | Team Member |
 |-------|-------------|-------------|-------|-------|-------------|
 | RetinaNet | 0.8378 | 0.9365 | 0.7831 | 0.8636 | Nandan |
-| MedGamma | ? | ? | ? | ? | Abhay |
+| MedGamma | ? | ? | ? | ? | Anubhav |
 | ViT | ? | ? | ? | ? | Nidhi |
-| Other | ? | ? | ? | ? | Anubhav |
+| Other | ? | ? | ? | ? | Abhay |
 
 ---
 
