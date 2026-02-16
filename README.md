@@ -186,6 +186,111 @@ model.eval()
 # Cell: Prediction
 # Your model's prediction logic
 ```
+#### Mainly Step 4
+```python
+## Step 4: Load YOUR Model and Test Data
+
+# ===== CHANGE #1: UPLOAD YOUR MODEL FILE =====
+print("📤 Upload your trained model (.pth file)...")
+from google.colab import files
+uploaded = files.upload()  # ← A box will appear, select your .pth file
+
+# Get the filename (whatever you uploaded)
+model_filename = list(uploaded.keys())[0]
+print(f"✅ Uploaded: {model_filename}")
+
+# ===== CHANGE #2: LOAD YOUR MODEL =====
+import torch
+from monai.networks.nets import RetinaNet  # ← Change this import for your model!
+
+print("🔧 Loading model...")
+model = RetinaNet(  # ← CHANGE THIS to your model class
+    spatial_dims=2,
+    num_classes=2,  # Normal vs Abnormal
+    num_anchors=9,
+    size_ratio=[1.0, 2.0, 0.5],
+    aspect_ratios=[0.5, 1.0, 2.0],
+    feature_channels=256,
+    num_feature_levels=5,
+)
+
+# Load your trained weights
+model.load_state_dict(torch.load(model_filename))
+model.eval()  # Set to evaluation mode
+model = model.cuda() if torch.cuda.is_available() else model
+print("✅ Model loaded!")
+
+# ===== CHANGE #3: UPLOAD YOUR TEST DATA CSV =====
+print("\n📤 Upload your test_data.csv file...")
+uploaded_csv = files.upload()  # ← Another box appears, select your CSV
+
+# Get CSV filename
+csv_filename = list(uploaded_csv.keys())[0]
+print(f"✅ Uploaded: {csv_filename}")
+
+# ===== CHANGE #4: LOAD YOUR TEST DATA =====
+import pandas as pd
+print("📊 Loading test data...")
+test_df = pd.read_csv(csv_filename)
+print(f"✅ Loaded {len(test_df)} test samples")
+print(f"   Normal (0): {(test_df['label'] == 0).sum()}")
+print(f"   Abnormal (1): {(test_df['label'] == 1).sum()}")
+
+# Get the true labels
+true_labels = test_df['label'].values
+
+# ===== CHANGE #5: RUN PREDICTIONS WITH YOUR MODEL =====
+print("\n🔮 Running predictions...")
+from PIL import Image
+import torchvision.transforms as transforms
+
+# Define preprocessing (CHANGE THIS if your model needs different preprocessing)
+preprocess = transforms.Compose([
+    transforms.Resize((512, 512)),  # ← Change size if needed
+    transforms.ToTensor(),
+    transforms.Normalize(mean=[0.485], std=[0.229])  # ← Change if needed
+])
+
+predictions = []
+probabilities = []
+
+for idx, row in test_df.iterrows():
+    image_path = row['image_path']
+    
+    # Load image
+    try:
+        img = Image.open(image_path).convert('L')  # L for grayscale
+        img_tensor = preprocess(img).unsqueeze(0)  # Add batch dimension
+        
+        if torch.cuda.is_available():
+            img_tensor = img_tensor.cuda()
+        
+        # Run prediction
+        with torch.no_grad():
+            output = model(img_tensor)
+            # ↓ CHANGE THIS based on your model's output format
+            prob = torch.sigmoid(output).cpu().item()
+        
+        # Convert to binary prediction
+        pred = 1 if prob > 0.5 else 0
+        
+        predictions.append(pred)
+        probabilities.append(prob)
+        
+        if (idx + 1) % 10 == 0:
+            print(f"   Processed {idx + 1}/{len(test_df)} images...")
+    
+    except Exception as e:
+        print(f"   ⚠️ Error on {image_path}: {e}")
+        continue
+
+predictions = np.array(predictions)
+probabilities = np.array(probabilities)
+
+print(f"✅ Predictions complete!")
+print(f"   Predicted Normal: {(predictions == 0).sum()}")
+print(f"   Predicted Abnormal: {(predictions == 1).sum()}")
+```
 
 ### Keep Everything Else The Same!
 
