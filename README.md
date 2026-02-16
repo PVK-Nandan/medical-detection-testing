@@ -291,6 +291,48 @@ print(f"✅ Predictions complete!")
 print(f"   Predicted Normal: {(predictions == 0).sum()}")
 print(f"   Predicted Abnormal: {(predictions == 1).sum()}")
 ```
+#### VISUAL GUIDE: What Changes
+```python
+# ============================================
+# 🔴 DELETE THIS (Fake Data)
+# ============================================
+num_samples = 100
+true_labels = np.random.choice([0, 1], ...)
+predictions = true_labels.copy()
+# ... all the fake data generation ...
+
+# ============================================
+# 🟢 REPLACE WITH THIS (Your Real Model)
+# ============================================
+
+# 1️⃣ UPLOAD MODEL
+uploaded = files.upload()  # ← Box appears, select .pth file
+
+# 2️⃣ LOAD MODEL
+model = RetinaNet(...)  # ← CHANGE to YourModel()
+model.load_state_dict(torch.load(model_filename))
+
+# 3️⃣ UPLOAD CSV
+uploaded_csv = files.upload()  # ← Box appears, select CSV
+
+# 4️⃣ LOAD CSV
+test_df = pd.read_csv(csv_filename)
+true_labels = test_df['label'].values
+
+# 5️⃣ RUN PREDICTIONS
+for idx, row in test_df.iterrows():
+    image = load_image(row['image_path'])
+    output = model(image)
+    prob = torch.sigmoid(output).item()  # ← Adjust for your model
+    pred = 1 if prob > 0.5 else 0
+    predictions.append(pred)
+    probabilities.append(prob)
+
+# ============================================
+# ✅ EVERYTHING AFTER THIS STAYS THE SAME!
+# ============================================
+```
+
 
 ### Keep Everything Else The Same!
 
