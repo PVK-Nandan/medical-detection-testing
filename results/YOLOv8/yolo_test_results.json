@@ -1,0 +1,11 @@
+{
+    "model": "YOLOv8n",
+    "task": "Bone Fracture Object Detection",
+    "split": "test",
+    "metrics": {
+        "mAP_50": 0.1668,
+        "mAP_50_95": 0.0582,
+        "precision": 0.1739,
+        "recall": 0.2156
+    }
+}
